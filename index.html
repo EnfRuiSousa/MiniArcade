@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MiniArcade | Jogos Clássicos</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="brand">
+            <span class="brand-icon">🎮</span>
+            <div>
+                <strong>MiniArcade</strong>
+                <small>Jogos clássicos</small>
+            </div>
+        </div>
+        <span class="top-label">5 jogos • Diversão sem instalar nada</span>
+    </header>
+
+    <main class="container">
+
+        <section class="welcome">
+            <span class="eyebrow">A TUA PEQUENA SALA DE JOGOS</span>
+            <h1>Escolhe um jogo. <span>Diverte-te!</span></h1>
+            <p>
+                Cinco jogos clássicos para desafiar a memória,
+                a lógica e a sorte.
+            </p>
+        </section>
+
+        <nav class="game-menu" aria-label="Escolher jogo">
+            <button class="game-tab active" data-game="memory">
+                <span class="tab-icon">🧠</span>
+                <strong>Memória</strong>
+            </button>
+            <button class="game-tab" data-game="sudoku">
+                <span class="tab-icon">🔢</span>
+                <strong>Sudoku</strong>
+            </button>
+            <button class="game-tab" data-game="hangman">
+                <span class="tab-icon">🔤</span>
+                <strong>Enforcado</strong>
+            </button>
+            <button class="game-tab" data-game="tictactoe">
+                <span class="tab-icon">⭕</span>
+                <strong>Jogo do Galo</strong>
+            </button>
+            <button class="game-tab" data-game="rps">
+                <span class="tab-icon">✊</span>
+                <strong>Pedra, Papel, Tesoura</strong>
+            </button>
+        </nav>
+
+        <div class="game-container">
+
+            <!-- ===================================== -->
+            <!-- MEMORY -->
+            <!-- ===================================== -->
+
+            <section id="memory" class="game-panel active">
+                <div class="game-heading">
+                    <div>
+                        <span class="eyebrow">JOGO 01</span>
+                        <h2>🧠 Jogo da Memória</h2>
+                        <p>Vira as cartas e encontra os 8 pares.</p>
+                    </div>
+                    <button class="btn secondary" id="memoryRestart">
+                        ↻ Novo jogo
+                    </button>
+                </div>
+
+                <div class="stats">
+                    <div class="stat">
+                        <span>Tentativas</span>
+                        <strong id="memoryMoves">0</strong>
+                    </div>
+                    <div class="stat">
+                        <span>Pares encontrados</span>
+                        <strong id="memoryPairs">0 / 8</strong>
+                    </div>
+                </div>
+
+                <div class="memory-board" id="memoryBoard"></div>
+
+                <p id="memoryMessage"
+                   class="message" role="status"
+                   aria-live="polite"></p>
+            </section>
+
+            <!-- ===================================== -->
+            <!-- SUDOKU -->
+            <!-- ===================================== -->
+
+            <section id="sudoku" class="game-panel">
+                <div class="game-heading">
+                    <div>
+                        <span class="eyebrow">JOGO 02</span>
+                        <h2>🔢 Sudoku</h2>
+                        <p>Completa a grelha com números de 1 a 9.</p>
+                    </div>
+                    <button class="btn secondary" id="sudokuRestart">
+                        ↻ Novo Sudoku
+                    </button>
+                </div>
+
+                <div class="sudoku-layout">
+                    <div class="sudoku-board" id="sudokuBoard"></div>
+
+                    <div class="sudoku-side">
+                        <label for="difficulty">Dificuldade</label>
+                        <select id="difficulty">
+                            <option value="easy">Fácil</option>
+                            <option value="medium">Médio</option>
+                            <option value="hard">Difícil</option>
+                        </select>
+
+                        <h3>Escolhe um número</h3>
+                        <div class="number-pad" id="numberPad"></div>
+
+                        <button class="btn secondary"
+                                id="sudokuErase">
+                            Apagar número
+                        </button>
+                        <button class="btn secondary"
+                                id="sudokuHint">
+                            💡 Dica
+                        </button>
+                        <button class="btn primary"
+                                id="sudokuCheck">
+                            Verificar
+                        </button>
+
+                        <p id="sudokuMessage"
+                           class="message"
+                           role="status"
+                           aria-live="polite"></p>
+
+                        <p class="hint">
+                            Seleciona uma casa vazia e introduz
+                            um número com o teclado ou os botões.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================================== -->
+            <!-- HANGMAN -->
+            <!-- ===================================== -->
+
+            <section id="hangman" class="game-panel">
+                <div class="game-heading">
+                    <div>
+                        <span class="eyebrow">JOGO 03</span>
+                        <h2>🔤 Jogo do Enforcado</h2>
+                        <p>Descobre a palavra antes de esgotar as tentativas.</p>
+                    </div>
+                    <button class="btn secondary" id="hangmanRestart">
+                        ↻ Nova palavra
+                    </button>
+                </div>
+
+                <div class="hangman-layout">
+                    <div class="drawing">
+                        <svg viewBox="0 0 250 250"
+                             aria-label="Desenho do enforcado">
+                            <path d="M35 225 H185 M75 225 V25 H160 V55"
+                                  stroke="#64748b"
+                                  stroke-width="7"
+                                  fill="none"
+                                  stroke-linecap="round" />
+
+                            <circle class="body-part"
+                                    cx="160" cy="77" r="22" />
+
+                            <line class="body-part"
+                                  x1="160" y1="99"
+                                  x2="160" y2="158" />
+
+                            <line class="body-part"
+                                  x1="160" y1="116"
+                                  x2="126" y2="143" />
+
+                            <line class="body-part"
+                                  x1="160" y1="116"
+                                  x2="194" y2="143" />
+
+                            <line class="body-part"
+                                  x1="160" y1="158"
+                                  x2="131" y2="199" />
+
+                            <line class="body-part"
+                                  x1="160" y1="158"
+                                  x2="189" y2="199" />
+                        </svg>
+                    </div>
+
+                    <div class="hangman-content">
+                        <p class="hint">
+                            Categoria: <strong id="hangmanHint"></strong>
+                        </p>
+                        <p id="hangmanErrors" class="attempts"></p>
+                        <div id="hangmanWord" class="word"></div>
+                        <p id="hangmanMessage"
+                           class="message"
+                           role="status"
+                           aria-live="polite"></p>
+                    </div>
+                </div>
+
+                <div class="letter-grid" id="hangmanLetters"></div>
+            </section>
+
+            <!-- ===================================== -->
+            <!-- TIC TAC TOE -->
+            <!-- ===================================== -->
+
+            <section id="tictactoe" class="game-panel">
+                <div class="game-heading">
+                    <div>
+                        <span class="eyebrow">JOGO 04</span>
+                        <h2>⭕ Jogo do Galo</h2>
+                        <p>Joga contra o computador. Tu és o X.</p>
+                    </div>
+                    <button class="btn secondary" id="tttRestart">
+                        ↻ Nova partida
+                    </button>
+                </div>
+
+                <div class="stats">
+                    <div class="stat">
+                        <span>Tu (X)</span>
+                        <strong id="tttPlayer">0</strong>
+                    </div>
+                    <div class="stat">
+                        <span>Empates</span>
+                        <strong id="tttDraws">0</strong>
+                    </div>
+                    <div class="stat">
+                        <span>Computador (O)</span>
+                        <strong id="tttComputer">0</strong>
+                    </div>
+                </div>
+
+                <div id="tttBoard" class="ttt-board"></div>
+
+                <p id="tttMessage"
+                   class="message" role="status"
+                   aria-live="polite">A tua vez!</p>
+            </section>
+
+            <!-- ===================================== -->
+            <!-- ROCK PAPER SCISSORS -->
+            <!-- ===================================== -->
+
+            <section id="rps" class="game-panel">
+                <div class="game-heading">
+                    <div>
+                        <span class="eyebrow">JOGO 05</span>
+                        <h2>✊ Pedra, Papel ou Tesoura</h2>
+                        <p>Escolhe uma jogada e desafia o computador.</p>
+                    </div>
+                    <button class="btn secondary" id="rpsRestart">
+                        ↻ Limpar pontos
+                    </button>
+                </div>
+
+                <div class="stats">
+                    <div class="stat">
+                        <span>Vitórias</span>
+                        <strong id="rpsWins">0</strong>
+                    </div>
+                    <div class="stat">
+                        <span>Empates</span>
+                        <strong id="rpsDraws">0</strong>
+                    </div>
+                    <div class="stat">
+                        <span>Derrotas</span>
+                        <strong id="rpsLosses">0</strong>
+                    </div>
+                </div>
+
+                <div class="rps-buttons">
+                    <button class="rps-choice" data-choice="pedra">
+                        <span>✊</span> Pedra
+                    </button>
+                    <button class="rps-choice" data-choice="papel">
+                        <span>✋</span> Papel
+                    </button>
+                    <button class="rps-choice" data-choice="tesoura">
+                        <span>✌️</span> Tesoura
+                    </button>
+                </div>
+
+                <div id="rpsResult" class="rps-result">
+                    Faz a tua escolha!
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer>
+        MiniArcade · Desenvolvido com HTML, CSS e JavaScript
+    </footer>
+</body>
+</html>
